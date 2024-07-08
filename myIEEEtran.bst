@@ -2,7 +2,7 @@
     %% myIEEEtran.bst is based upon IEEEtran.bst, but add DOI, ISSN, and ISBN support
     %% 
     %% Created on 2013.05.18 by GQMJr
-    %% %% "URL accessed date" added on 2024.07.08 by Federico Ruilova 
+    %% Url added on 2024.07.08 by Federico Ruilova
     %% IEEEtran.bst
     %% BibTeX Bibliography Style file for IEEE Journals and Conferences (unsorted)
     %% Version 1.13 (2008/09/30)
@@ -1940,6 +1940,7 @@
     
     
     %% URL
+    %%This is the basic functionality
     
     % FUNCTION {format.url}
     % { url empty$
@@ -1958,49 +1959,71 @@
     %   if$
     % }
 
-    FUNCTION {format.url}
-    { url empty$
-        { "" }
-        { this.to.prev.status
-          this.status.std
-          cap.yes 'status.cap :=
-          name.url.prefix " " *
-          "\url{" * url * "}" *
-          punct.no 'this.status.punct :=
-          punct.period 'prev.status.punct :=
-          space.normal 'this.status.space :=
-          space.normal 'prev.status.space :=
-          quote.no 'this.status.quote :=
-          urldate empty$
-            { "there is url but no urldate in " cite$ * warning$ }
-            { " [Accessed: " * urldate * "]" * }
-          if$  
-        }
-      if$
-    }
+    %%This is the accesed date functionality for urls and online resources
 
+        % FUNCTION {format.url}
+        % { url empty$
+        %     { "" }
+        %     {
+        %       type$ "online" =
+        %       type$ "internet" = or
+        %       type$ "webpage" = or
+        %       type$ "www" = or
+        %       {
+        %         this.to.prev.status
+        %         this.status.std
+        %         cap.yes 'status.cap :=
+        %         name.url.prefix " " *
+        %         "\url{" * url * "}" *
+        %         punct.no 'this.status.punct :=
+        %         punct.period 'prev.status.punct :=
+        %         space.normal 'this.status.space :=
+        %         space.normal 'prev.status.space :=
+        %         quote.no 'this.status.quote :=
+        %         urldate empty$
+        %           { "there is url but no urldate in " cite$ * warning$ }
+        %           { " [Accessed: " * urldate * "]" * }
+        %         if$
+        %       }
+        %       {
+        %         this.to.prev.status
+        %         this.status.std
+        %         cap.yes 'status.cap :=
+        %         name.url.prefix " " *
+        %         "\url{" * url * "}" *
+        %         punct.no 'this.status.punct :=
+        %         punct.period 'prev.status.punct :=
+        %         space.normal 'this.status.space :=
+        %         space.normal 'prev.status.space :=
+        %         quote.no 'this.status.quote :=
+        %       }
+        %       if$
+        %     }
+        %   if$
+        % }
+        
 
     
-    %FUNCTION {format.url}
-    %{ url empty$
-    %    { "" }
-    %    { this.to.prev.status
-    %      this.status.std
-    %      cap.yes 'status.cap :=
-    %      name.url.prefix " " *
-    %      "\url{" * url * "}" *
-    %      punct.no 'this.status.punct :=
-    %      punct.period 'prev.status.punct :=
-    %      space.normal 'this.status.space :=
-    %      space.normal 'prev.status.space :=
-    %      quote.no 'this.status.quote :=
-    %      urldate empty$
-    %       { "there is url but no urldate in " cite$ * warning$ }
-    %       { " [Accessed: " * urldate * "]" * }
-    %       if$
-    %    }
-    %  if$
-    %}
+    FUNCTION {format.url}
+    { url empty$
+       { "" }
+       { this.to.prev.status
+         this.status.std
+         cap.yes 'status.cap :=
+         name.url.prefix " " *
+         "\url{" * url * "}" *
+         punct.no 'this.status.punct :=
+         punct.period 'prev.status.punct :=
+         space.normal 'this.status.space :=
+         space.normal 'prev.status.space :=
+         quote.no 'this.status.quote :=
+         urldate empty$
+          { "there is url but no urldate in " cite$ * warning$ }
+          { " [Accessed: " * urldate * "]" * }
+          if$
+       }
+     if$
+    }
     
     %% ISBN
     %% added by GQMJr
